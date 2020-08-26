@@ -1,0 +1,7 @@
+electricity <- read.table("ExData_Plotting1-master/household_power_consumption.txt", sep = ";", header = TRUE)
+temp <- subset(electricity, as.Date(Date, "%d/%m/%Y") >= "2007-02-01" &  as.Date(Date, "%d/%m/%Y") <= "2007-02-02" )
+temp1 <- temp %>% filter(Global_active_power != "?")
+temp1$Time <- strptime(paste(temp1$Date, temp1$Time), "%d/%m/%Y %H:%M:%S")
+plot(temp1$Time, temp1$Global_active_power, type = "l", xlab = "", ylab = "Global Active Power (Killowatts)")
+dev.copy(device = png, 'plot2.png', width = 480, height = 480)
+dev.off()
